@@ -16,18 +16,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table UserData(email TEXT, passcode TEXT)");
+        db.execSQL("create Table UserData(name TEXT,email TEXT, passcode TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    public Boolean insertUserData(String email,String passcode){
+    public Boolean insertUserData(String name,String email,String passcode){
         //Create necessarily var
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         //Set Content
+        contentValues.put("name",name);
         contentValues.put("email",email);
         contentValues.put("passcode",passcode);
         //Insert to the table
