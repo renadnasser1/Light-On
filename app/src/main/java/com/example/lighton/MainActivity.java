@@ -3,13 +3,18 @@ package com.example.lighton;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -40,14 +45,23 @@ public class MainActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        String phoneNumber = tm.getLine1Number();
-        Toast.makeText(getApplicationContext(), phoneNumber, Toast.LENGTH_SHORT).show();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+        registerReceiver(receiver, filter);
+
+        IntentFilter filter2 = new IntentFilter();
+        filter.addAction(Intent.ACTION_BOOT_COMPLETED);
+        registerReceiver(receiver, filter2);
+
+
+
+//
 
 
 
 
 
-        };
+    };
 
 
 

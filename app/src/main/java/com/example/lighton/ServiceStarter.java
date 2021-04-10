@@ -2,20 +2,27 @@ package com.example.lighton;
 
 import android.Manifest;
 import android.accessibilityservice.AccessibilityService;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.usb.UsbManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
 public class ServiceStarter extends BroadcastReceiver {
     public String myPhoneNumber = "11111111";
     @Override
     public void onReceive(Context context, Intent intent) {
+
 
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             Toast.makeText(context, "boot", Toast.LENGTH_SHORT).show();
@@ -27,7 +34,13 @@ public class ServiceStarter extends BroadcastReceiver {
 
         } else {
 
+
             Toast.makeText(context, "channge", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sim card is changed", Toast.LENGTH_LONG).show();
+
+
+
+
             // Checks Sim card State
             TelephonyManager telephoneMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             int simState = telephoneMgr.getSimState();
@@ -80,15 +93,37 @@ public class ServiceStarter extends BroadcastReceiver {
                     else{
                         Log.i("SimStateListener", "Sim card is changed");
                     Toast.makeText(context, "Sim card is changed", Toast.LENGTH_LONG).show();
+                        notify(context);
+
+//
                         break;
                     }
             }
         }
+
         }
 
+    public void notify(  Context  context){
+        Intent intent2 = new Intent(context, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder b = new NotificationCompat.Builder(context);
+
+        b.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle("USB notification")
+                .setContentText("The application is disconnected from powe")
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+                .setContentIntent(contentIntent);
 
 
 
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, b.build());
+
+    }
 
 
 }

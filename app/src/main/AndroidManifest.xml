@@ -29,17 +29,31 @@ INTERNET<!--    <uses-permission-->
 
         <!-- Start the Service if applicable on boot -->
         <receiver android:name=".ServiceStarter">
+
+        <intent-filter>
+            <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.SIM_STATE_CHANGED" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.PHONE_STATE" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.QUICKBOOT_POWERON" />
+        </intent-filter>
+    </receiver>
+        <receiver android:name=".USBReciver">
+
+            <intent-filter>
+<!--                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BootReciver">
+
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SIM_STATE_CHANGED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
 
