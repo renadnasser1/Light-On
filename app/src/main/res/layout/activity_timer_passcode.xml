@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TimerPasscode"
+    android:background="@drawable/gredient_background">
+
+    <TextView
+        android:id="@+id/countdown_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01:00"
+        android:textSize="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <EditText
+        android:id="@+id/passcode_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/countdown_text"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:textColor="@color/black"
+        android:hint="Enter your passcode"
+        android:inputType="textPassword" />
+
+    <Button
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/countdown_text"
+        android:layout_alignEnd="@+id/passcode_editText"
+        android:layout_alignRight="@+id/passcode_editText"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="-52dp"
+        android:layout_marginRight="-52dp"
+        android:background="@drawable/ic_go"/>
+
+
+</RelativeLayout>
