@@ -6,28 +6,26 @@ package com.example.lighton;
         import android.os.Bundle;
         import android.util.Patterns;
         import android.view.View;
+        import android.widget.EditText;
+        import android.widget.TextView;
         import android.widget.Toast;
 
         import com.google.android.material.textfield.TextInputLayout;
 
+        import java.lang.reflect.Array;
         import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
-                    "(?=.*[0-9])" +         //at least 1 digit
-                    "(?=.*[a-z])" +         //at least 1 lower case letter
-                    "(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{6,}" +               //at least 6 characters
-                    "$");
+                    "(?=.*[0-9])" +           //no white spaces
+                    ".{4,}");
 
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputName;
-    private TextInputLayout textInputPassword;
+    private TextInputLayout digitOne, digitTwo,digitThree,digitFour;
+    private String passcode;
     private DBHelper database;
 
     @Override
@@ -38,7 +36,10 @@ public class RegisterActivity extends AppCompatActivity {
         database =  new DBHelper(this);
         textInputEmail = findViewById(R.id.text_input_email);
         textInputName = findViewById(R.id.text_input_name);
-        textInputPassword = findViewById(R.id.text_input_password);
+        digitOne = findViewById(R.id.passcode_1);
+        digitTwo = findViewById(R.id.passcode_2);
+        digitThree = findViewById(R.id.passcode_3);
+        digitFour = findViewById(R.id.passcode_4);
     }
 
     private boolean validateEmail() {
@@ -72,19 +73,26 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validatePassword() {
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+        String one = digitOne.getEditText().getText().toString().trim();
+        String two = digitOne.getEditText().getText().toString().trim();
+        String three = digitThree.getEditText().getText().toString().trim();
+        String four = digitFour.getEditText().getText().toString().trim();
+        passcode = one + two + three + four;
 
-        if (passwordInput.isEmpty()) {
-            textInputPassword.setError("Field can't be empty");
-            return false;
-        }else if(!PASSWORD_PATTERN.matcher(passwordInput).matches() ) { //.matches()
-            textInputPassword.setError("Weak Password");
-            return false;
-        }else{
-            textInputPassword.setError(null);
-            textInputPassword.setErrorEnabled(false);
-            return true;
+        TextInputLayout textViews[] = {digitOne,digitTwo,digitThree,digitFour};
+
+        Boolean flag = true;
+        for(int i=0;i<4;i++){
+            String ch = textViews[i].getEditText().getText().toString().trim();
+            if (ch.isEmpty()){
+                textViews[i].setError("Missing");
+                flag = false;
+            }else{
+                textViews[i].setError(null);
+                textViews[i].setErrorEnabled(false);
+            }
         }
+        return flag;
     }
 
     private String PASSWORD_PATTERN(String passwordInput) {
@@ -96,18 +104,18 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         insertData();
-//        String input = "Email: " + textInputEmail.getEditText().getText().toString();
-//        input += "\n";
-//        input += "Name: " + textInputName.getEditText().getText().toString();
-//        input += "\n";
-//        input += "Password: " + textInputPassword.getEditText().getText().toString();
-//        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
+        String input = "Email: " + textInputEmail.getEditText().getText().toString();
+        input += "\n";
+        input += "Name: " + textInputName.getEditText().getText().toString();
+        input += "\n";
+        input += "Password: " + passcode;
+        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
     }
 
         public void insertData(){
         String name = textInputName.getEditText().getText().toString();
         String email = textInputEmail.getEditText().getText().toString();
-        String passCode = textInputPassword.getEditText().getText().toString();
+        String passCode = passcode;
 
         boolean checkInset = database.insertUserData(name,email,passCode);
         if(checkInset){
