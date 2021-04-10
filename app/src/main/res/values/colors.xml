@@ -7,4 +7,11 @@
     <color name="beige">#FBF8E8</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gold">#E4C85C</color>
+    <color name="dark_peach">#DF7861</color>
+    <color name="light_peach">#ECB390</color>
+    <color name="light_green">#D5E2D4</color>
+    <color name="beige">#FBF8E8</color>
+
+
 </resources>
