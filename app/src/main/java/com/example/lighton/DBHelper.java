@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -17,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create Table UserData(name TEXT,email TEXT, passcode TEXT)");
+
     }
 
     @Override
@@ -44,4 +46,66 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("Select * from UserData",null);
         return cursor;
     }
+
+    public boolean isEmpty(){
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery("Select * from UserData", null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                if (cursor.getInt(0) == 0) {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        }catch (Exception e){
+            return true;
+        }
+        return false;
+
+    }
+
+    public void delete(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ "UserData");
+    }
 }
+
+
+//    public void insertData(){
+//        //textOne.getText().toString(); Should be replaced
+//        String name = "name";
+//        String email = "namw@gmail.com";
+//        String passCode = "1234";
+//
+//        boolean checkInset = databaseHelper.insertUserData(name,email,passCode);
+//        if(checkInset){
+//            Toast.makeText(this,"Data saved successfully",Toast.LENGTH_SHORT).show();
+//            //TODO Navigate
+//        }else{
+//            Toast.makeText(this,"Data Cannot be saved!",Toast.LENGTH_SHORT).show();
+//
+//        }
+//
+//    }
+//
+//    public void getData(){
+//        //Get Cursor from DB
+//        Cursor res = databaseHelper.getData();
+//        //Check Row returned
+//        if(res.getCount()==0){
+//            Toast.makeText(this,"No entry exist",Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        //Extract Data
+//        String name=null , email=null , passcode = null;
+//        while(res.moveToNext()){
+//            name = "Name "+res.getString(0)+"\n" ;
+//            email = "Email "+res.getString(1)+"\n";
+//            passcode = "Passcode"+res.getString(2)+"\n";
+//        }
+//        textOne.setText(name);
+//        textTwo.setText(email);
+//    }
