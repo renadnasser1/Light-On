@@ -28,4 +28,10 @@ public class MainActivity extends AppCompatActivity {
         db.delete();
         finish();
     }
+
+    public void goToTimerPasscode(View v){
+
+        Intent intent = new Intent(this, TimerPasscode.class);
+        startActivity(intent);
+    }
 }

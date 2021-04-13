@@ -6,39 +6,156 @@
     android:layout_height="match_parent"
     tools:context=".TimerPasscode"
     android:background="@drawable/gredient_background">
+    <View
+        android:id="@+id/upperView"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/countdown_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="01:00"
-        android:textSize="50dp"
+        android:textSize="60dp"
+        android:layout_below="@+id/upperView"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        />
 
-    <EditText
-        android:id="@+id/passcode_editText"
+    <TextView
+        android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/countdown_text"
+        android:text="Please enter 4 digits passcode or use your fingerprint"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/countdown_text"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+       />
+
+
+    <LinearLayout
+        android:id="@+id/passcode_layout"
+        android:layout_width="361dp"
+        android:layout_height="99dp"
+        android:layout_below="@+id/label"
         android:layout_centerInParent="true"
-        android:layout_marginTop="0dp"
-        android:ems="10"
-        android:textColor="@color/black"
-        android:hint="Enter your passcode"
-        android:inputType="textPassword" />
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passcode1"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/p1_editText"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/passcode2"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="25dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passcode2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/p2_editText"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/passcode3"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="25dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passcode3"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/p3_editText"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/passcode4"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="25dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passcode4"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/p4_editText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:imeOptions="actionDone"
+                android:nextFocusDown="@+id/passcode1"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="25dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/viewBeforeButton"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:layout_below="@id/passcode_layout"/>
 
     <Button
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/countdown_text"
-        android:layout_alignEnd="@+id/passcode_editText"
-        android:layout_alignRight="@+id/passcode_editText"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="-52dp"
-        android:layout_marginRight="-52dp"
-        android:background="@drawable/ic_go"/>
+        android:id="@+id/verifyButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/verfiy"
+        android:layout_marginTop="10dp"
+        android:onClick="verfiyPasscode"
+        android:layout_below="@+id/viewBeforeButton"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
 
 </RelativeLayout>

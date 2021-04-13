@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400px"
+        android:layout_marginTop="200px"
         android:textSize="40sp"
         android:textAlignment="center"
         android:layout_marginBottom="20px"
@@ -42,8 +42,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"/>
+            android:hint="@string/email_requiered"
+            android:inputType="textEmailAddress"
+         />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -55,7 +56,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name"
+            android:hint="@string/name_requiered"
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -63,81 +64,109 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please Enter 4 digits Passcode"
+        android:text="@string/passcode_requiered"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"></TextView>
+        android:layout_marginBottom="10dp"/>
+
     <LinearLayout
+        android:id="@+id/passcode_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="39dp"
-        android:layout_marginRight="30dp">
+        android:layout_height="118dp"
+        android:layout_below="@+id/label"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passcode_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passcode_1"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:inputType="numberPassword"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/p1"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:nextFocusForward="@+id/passcode2"
+                android:textAlignment="center"
+                android:textSize="25dp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passcode_2"
-            android:layout_width="match_parent"
+            android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/p2"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:inputType="numberPassword"
                 android:maxLength="1"
-                android:inputType="numberPassword"/>
+                android:nextFocusForward="@+id/passcode3"
+                android:textAlignment="center"
+                android:textSize="25dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passcode_3"
-            android:layout_width="match_parent"
+            android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/p3"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:inputType="numberPassword"
                 android:maxLength="1"
-                android:inputType="numberPassword"/>
+                android:nextFocusForward="@+id/passcode4"
+                android:textAlignment="center"
+                android:textSize="25dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passcode_4"
-            android:layout_width="match_parent"
+            android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="60dp"
+                android:id="@+id/p4"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:inputType="numberPassword"
                 android:maxLength="1"
-                android:inputType="numberPassword"/>
+                android:nextFocusForward="@+id/passcode1"
+                android:imeOptions="actionDone"
+                android:textAlignment="center"
+                android:textSize="25dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
