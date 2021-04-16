@@ -9,5 +9,10 @@
     <string name="show_password">Show Password</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
-    <string name="Password"/>
+    <string name="Password" />
+    <string name="verfiy">Verify</string>
+    <string name="email_requiered">Email<font color='#DF7861'>*</font></string>
+    <string name="name_requiered">Name<font color='#DF7861'>*</font></string>
+    <string name="passcode_requiered">Please Enter 4 digits Passcode<font color='#DF7861'>*</font></string>
+
 </resources>

@@ -4,6 +4,8 @@ package com.example.lighton;
 
         import android.content.Intent;
         import android.os.Bundle;
+        import android.text.Editable;
+        import android.text.TextWatcher;
         import android.util.Patterns;
         import android.view.View;
         import android.widget.EditText;
@@ -25,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputName;
     private TextInputLayout digitOne, digitTwo,digitThree,digitFour;
+    private EditText pOne, pTwo, pThree, pFour;
     private String passcode;
     private DBHelper database;
 
@@ -40,6 +43,14 @@ public class RegisterActivity extends AppCompatActivity {
         digitTwo = findViewById(R.id.passcode_2);
         digitThree = findViewById(R.id.passcode_3);
         digitFour = findViewById(R.id.passcode_4);
+        pOne = findViewById(R.id.p1);
+        pTwo = findViewById(R.id.p2);
+        pThree = findViewById(R.id.p3);
+        pFour = findViewById(R.id.p4);
+
+        moveToNextField(pOne, pTwo);
+        moveToNextField(pTwo, pThree);
+        moveToNextField(pThree, pFour);
     }
 
     private boolean validateEmail() {
@@ -74,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean validatePassword() {
         String one = digitOne.getEditText().getText().toString().trim();
-        String two = digitOne.getEditText().getText().toString().trim();
+        String two = digitTwo.getEditText().getText().toString().trim();
         String three = digitThree.getEditText().getText().toString().trim();
         String four = digitFour.getEditText().getText().toString().trim();
         passcode = one + two + three + four;
@@ -130,5 +141,26 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void moveToNextField(EditText field, EditText nextField){
+        field.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(field.getText().toString().trim().length() == 1){
+                    nextField.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 }

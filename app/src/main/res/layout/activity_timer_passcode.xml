@@ -1,94 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".RegisterActivity">
+    tools:context=".TimerPasscode"
+    android:background="@drawable/gredient_background">
+    <View
+        android:id="@+id/upperView"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_weight="1" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/countdown_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200px"
-        android:textSize="40sp"
-        android:textAlignment="center"
-        android:layout_marginBottom="20px"
-        app:errorEnabled="true"
-        android:text="Register"
-        android:textColor="@color/black"
-        android:gravity="center_horizontal" />
+        android:text="01:00"
+        android:textSize="60dp"
+        android:layout_below="@+id/upperView"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_marginBottom="50px"
-        app:errorEnabled="true"
-        android:text="Please Fill All The Required Information"
-        android:gravity="center_horizontal" />
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email_requiered"
-            android:inputType="textEmailAddress"
-         />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name_requiered"
-            android:inputType="text"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/passcode_requiered"
+        android:text="Please enter 4 digits passcode or use your fingerprint"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/countdown_text"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+       />
+
 
     <LinearLayout
         android:id="@+id/passcode_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="118dp"
+        android:layout_width="361dp"
+        android:layout_height="99dp"
         android:layout_below="@+id/label"
         android:layout_centerInParent="true"
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passcode_1"
+            android:id="@+id/passcode1"
             android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/p1"
+                android:id="@+id/p1_editText"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/passcode2"
                 android:inputType="numberPassword"
                 android:maxLength="1"
-                android:nextFocusForward="@+id/passcode2"
                 android:textAlignment="center"
                 android:textSize="25dp" />
 
@@ -100,18 +69,19 @@
             android:layout_weight="1" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passcode_2"
+            android:id="@+id/passcode2"
             android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/p2"
+                android:id="@+id/p2_editText"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/passcode3"
                 android:inputType="numberPassword"
                 android:maxLength="1"
-                android:nextFocusForward="@+id/passcode3"
                 android:textAlignment="center"
                 android:textSize="25dp" />
 
@@ -123,18 +93,19 @@
             android:layout_weight="1" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passcode_3"
+            android:id="@+id/passcode3"
             android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/p3"
+                android:id="@+id/p3_editText"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/passcode4"
                 android:inputType="numberPassword"
                 android:maxLength="1"
-                android:nextFocusForward="@+id/passcode4"
                 android:textAlignment="center"
                 android:textSize="25dp" />
 
@@ -146,19 +117,19 @@
             android:layout_weight="1" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passcode_4"
+            android:id="@+id/passcode4"
             android:layout_width="80dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/p4"
+                android:id="@+id/p4_editText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:imeOptions="actionDone"
+                android:nextFocusDown="@+id/passcode1"
                 android:inputType="numberPassword"
                 android:maxLength="1"
-                android:nextFocusForward="@+id/passcode1"
-                android:imeOptions="actionDone"
                 android:textAlignment="center"
                 android:textSize="25dp" />
 
@@ -167,12 +138,24 @@
 
     </LinearLayout>
 
+
+    <View
+        android:id="@+id/viewBeforeButton"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:layout_below="@id/passcode_layout"/>
+
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/verifyButton"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/register"
+        android:text="@string/verfiy"
         android:layout_marginTop="10dp"
-        android:onClick="confirmInput"/>
+        android:onClick="verfiyPasscode"
+        android:layout_below="@+id/viewBeforeButton"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
 
-</LinearLayout>
+</RelativeLayout>
