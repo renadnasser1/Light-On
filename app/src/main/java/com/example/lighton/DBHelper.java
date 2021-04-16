@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table UserData(name TEXT,email TEXT, passcode TEXT, phone TEXT)");
+        db.execSQL("create Table UserData(name TEXT,email TEXT, passcode TEXT, phone TEXT, usbCheck INTEGER DEFAULT 0)");
 
     }
 
@@ -33,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("email",email);
         contentValues.put("passcode",passcode);
         contentValues.put("phone",phone);
+        contentValues.put("usbCheck", 0 );
         //Insert to the table
         long result = db.insert("UserData",null,contentValues);
         //Return if success
