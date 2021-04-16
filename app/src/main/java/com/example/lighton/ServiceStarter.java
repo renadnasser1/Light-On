@@ -11,7 +11,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
+
 import android.hardware.usb.UsbManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;

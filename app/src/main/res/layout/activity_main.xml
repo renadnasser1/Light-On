@@ -34,16 +34,19 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/Text1">
     </TextView>
-    <CheckBox
-        android:id="@+id/CheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enable USB detached checking"/>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete data"
         android:onClick="deleteData"/>
+
+    <CheckBox
+        android:id="@+id/CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
+        android:text="Enable USB detached checking"/>
 
 </RelativeLayout>

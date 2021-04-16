@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -66,7 +68,24 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
 
     }
+    public String geColumntData(String column){
+        Cursor c = getData();
+        c.moveToFirst();
+        return c.getString(c.getColumnIndex(column));
+    }
+    public boolean update(int value ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String email = geColumntData("email");
+        cv.put("usbCheck", value);
+        long result = db.update("UserData", cv, "email" + "= ?", new String[] {email});
+        if (result == -1) {
+            return  false;
 
+        } else {
+            return  true;
+        }
+    }
     public void delete(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+ "UserData");

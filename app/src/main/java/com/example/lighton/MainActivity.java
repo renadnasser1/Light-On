@@ -14,18 +14,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.text.BoringLayout;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
+
+import static android.widget.Toast.*;
 
 public class MainActivity extends AppCompatActivity {
         DBHelper db ;
@@ -36,23 +41,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db =  new DBHelper(this);
 
-       db = new DBHelper(this);
         CheckBox simpleCheckBox = (CheckBox) findViewById(R.id.CheckBox);
+        setUSBcheck(simpleCheckBox);
 
 
-        Boolean checkBoxState = simpleCheckBox.isChecked();
-       TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
-       if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-           // TODO: Consider calling
-           //    ActivityCompat#requestPermissions
-           // here to request the missing permissions, and then overriding
-           //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-           //                                          int[] grantResults)
-           // to handle the case where the user grants the permission. See the documentation
-           // for ActivityCompat#requestPermissions for more details.
-           return;
-       }
+        simpleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                    updateUSBCheck(isChecked);
+            }
+                }
+        );
+
+
+//        TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+//       if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+//
+//           return;
+//       }
 
        IntentFilter filter = new IntentFilter();
        filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
@@ -60,11 +68,47 @@ public class MainActivity extends AppCompatActivity {
        registerReceiver(receiver, filter);
 
        IntentFilter filter2 = new IntentFilter();
-       filter.addAction(Intent.ACTION_BOOT_COMPLETED);
+       filter2.addAction(Intent.ACTION_BOOT_COMPLETED);
        registerReceiver(receiver, filter2);
 
 
 
+    }
+    public void setUSBcheck(CheckBox checkBox){
+        int state =  getUSBcheck();
+        if (state ==1){
+            checkBox.setChecked(true);
+        }else{
+            checkBox.setChecked(false);
+        }
+    }
+    public int getUSBcheck(){
+
+      DBHelper database;
+        database =  new DBHelper(this);
+        Cursor c = database.getData();
+        c.moveToFirst();
+        return c.getInt(c.getColumnIndex("usbCheck"));
+    }
+    public void updateUSBCheck(Boolean checkBoxState) {
+        DBHelper database;
+        database =  new DBHelper(this);
+
+        if (checkBoxState) {
+            if (database.update(1)) {
+                makeText(this, "update", LENGTH_SHORT).show();
+
+            } else {
+                makeText(this, "erorro", LENGTH_SHORT).show();
+            }
+        } else {
+            if (database.update(0)) {
+                makeText(this, "update", LENGTH_SHORT).show();
+
+            } else {
+                makeText(this, "erorro", LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void deleteData(View view) {
