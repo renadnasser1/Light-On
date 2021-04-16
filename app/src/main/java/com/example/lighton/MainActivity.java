@@ -17,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -27,6 +28,9 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
         DBHelper db ;
+    private BroadcastReceiver receiver;
+    private Object Context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

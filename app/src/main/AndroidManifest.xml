@@ -58,6 +58,7 @@ INTERNET<!--    <uses-permission-->
                 <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+    </application>
 
 
 
