@@ -36,4 +36,10 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.github.ajalt.reprint:core:3.3.2@aar' // required: supports marshmallow devices
+    implementation 'com.github.ajalt.reprint:reprint_spass:3.3.2@aar' // optional: deprecated support for pre-marshmallow Samsung devices
+    implementation 'com.github.ajalt.reprint:rxjava:3.3.2@aar' // optional: the RxJava 1 interface
+    implementation 'com.github.ajalt.reprint:rxjava2:3.3.2@aar' // optional: the RxJava 2 interface
+    implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+
 }

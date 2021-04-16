@@ -16,15 +16,24 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.content.Context;
 import android.widget.Toast;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver receiver;
     private Object Context;
+    DBHelper db;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -66,4 +75,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+        db = new DBHelper(this);
+
+    }
+
+    public void deleteData(View view) {
+        db.delete();
+        finish();
+    }
+
+    public void goToTimerPasscode(View v){
+
+        Intent intent = new Intent(this, TimerPasscode.class);
+        startActivity(intent);
+    }
 }

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Light On</string>
+    <string name="enter_your_password">Enter your password:</string>
+    <string name="password">Password</string>
+    <string name="warning">WARNING!</string>
+    <string name="register">Register</string>
+    <string name="password2">Password</string>
+    <string name="enterpassword">Enter Password</string>
+    <string name="show_password">Show Password</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="Password" />
+    <string name="verfiy">Verify</string>
+    <string name="email_requiered">Email<font color='#DF7861'>*</font></string>
+    <string name="name_requiered">Name<font color='#DF7861'>*</font></string>
+    <string name="passcode_requiered">Please Enter 4 digits Passcode<font color='#DF7861'>*</font></string>
+
 </resources>
