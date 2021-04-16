@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db =  new DBHelper(this);
-
         CheckBox simpleCheckBox = (CheckBox) findViewById(R.id.CheckBox);
         setUSBcheck(simpleCheckBox);
 
@@ -62,17 +61,18 @@ public class MainActivity extends AppCompatActivity {
 //           return;
 //       }
 
-       IntentFilter filter = new IntentFilter();
-       filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
 
-       registerReceiver(receiver, filter);
-
-       IntentFilter filter2 = new IntentFilter();
-       filter2.addAction(Intent.ACTION_BOOT_COMPLETED);
-       registerReceiver(receiver, filter2);
+        ReciverReigster();
 
 
-
+    }
+    public void ReciverReigster(){
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+        registerReceiver(receiver, filter);
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(Intent.ACTION_BOOT_COMPLETED);
+        registerReceiver(receiver, filter2);
     }
     public void setUSBcheck(CheckBox checkBox){
         int state =  getUSBcheck();
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void goToTimerPasscode(View v){
+    public void goToTimerPasscode(){
 
         Intent intent = new Intent(this, TimerPasscode.class);
         startActivity(intent);

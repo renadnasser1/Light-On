@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -16,9 +17,24 @@ public class USBReciver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         database =  new DBHelper(context);
         int state = getUSBcheck("usbCheck");
+        String phone = getData() ;
+        Toast.makeText(context, phone, Toast.LENGTH_LONG).show();
         if (state == 1){
-            notify(context);
+            goToTimerPasscode(context);
+
+          notify(context);
         }
+
+    }
+    public String getData(){
+        Cursor c = database.getData();
+        c.moveToFirst();
+        return c.getString(c.getColumnIndex("phone"));
+    }
+    public void goToTimerPasscode(Context context){
+        Intent i = new Intent(context,TimerPasscode.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
 
     }
     public int getUSBcheck(String column){
@@ -26,8 +42,9 @@ public class USBReciver extends BroadcastReceiver {
         c.moveToFirst();
         return c.getInt(c.getColumnIndex(column));
     }
-    public void notify(  Context  context){
-        Intent intent = new Intent(context, MainActivity.class);
+
+    public void notify( Context  context){
+        Intent intent = new Intent(context, TimerPasscode.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
         b.setAutoCancel(true)
