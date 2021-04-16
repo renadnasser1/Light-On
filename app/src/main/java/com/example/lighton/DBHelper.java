@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -17,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table UserData(name TEXT,email TEXT, passcode TEXT)");
+        db.execSQL("create Table UserData(name TEXT,email TEXT, passcode TEXT, phone TEXT)");
 
     }
 
@@ -25,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    public Boolean insertUserData(String name,String email,String passcode){
+    public Boolean insertUserData(String name,String email,String passcode,String phone ){
         //Create necessarily var
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -33,6 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("name",name);
         contentValues.put("email",email);
         contentValues.put("passcode",passcode);
+        contentValues.put("phone",phone);
         //Insert to the table
         long result = db.insert("UserData",null,contentValues);
         //Return if success
@@ -78,8 +78,9 @@ public class DBHelper extends SQLiteOpenHelper {
 //        String name = "name";
 //        String email = "namw@gmail.com";
 //        String passCode = "1234";
+//        String phone = "0555"
 //
-//        boolean checkInset = databaseHelper.insertUserData(name,email,passCode);
+//        boolean checkInset = databaseHelper.insertUserData(name,email,passCode,phone);
 //        if(checkInset){
 //            Toast.makeText(this,"Data saved successfully",Toast.LENGTH_SHORT).show();
 //            //TODO Navigate
@@ -100,11 +101,12 @@ public class DBHelper extends SQLiteOpenHelper {
 //        }
 //
 //        //Extract Data
-//        String name=null , email=null , passcode = null;
+//        String name=null , email=null , passcode=null , phone= null;
 //        while(res.moveToNext()){
 //            name = "Name "+res.getString(0)+"\n" ;
 //            email = "Email "+res.getString(1)+"\n";
 //            passcode = "Passcode"+res.getString(2)+"\n";
+//             phone = "phone"+res.getString(3)+"\n";
 //        }
 //        textOne.setText(name);
 //        textTwo.setText(email);

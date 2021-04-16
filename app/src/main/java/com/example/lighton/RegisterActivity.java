@@ -111,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void confirmInput(View v) {
+        System.out.println("Confirm called");
         if (!validateEmail() | !validateName() | !validatePassword()) {
             return;
         }
@@ -128,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = textInputEmail.getEditText().getText().toString();
         String passCode = passcode;
 
-        boolean checkInset = database.insertUserData(name,email,passCode);
+        boolean checkInset = database.insertUserData(name,email,passCode,"0000000000");
         if(checkInset){
             Toast.makeText(this,"Data saved successfully",Toast.LENGTH_SHORT).show();
 
