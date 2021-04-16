@@ -6,10 +6,12 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.database.Cursor;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.hardware.usb.UsbManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -19,7 +21,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 public class ServiceStarter extends BroadcastReceiver {
-    public String myPhoneNumber = "11111111";
+    public String myPhoneNumber;
+    private DBHelper database;
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -32,11 +35,13 @@ public class ServiceStarter extends BroadcastReceiver {
             context.startActivity(i);
 
 
+
         } else {
+            database =  new DBHelper(context);
+            String number = getData("phone");
 
-
-            Toast.makeText(context, "channge", Toast.LENGTH_SHORT).show();
-            Toast.makeText(context, "Sim card is changed", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "channge", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Sim card is changed", Toast.LENGTH_LONG).show();
 
 
 
@@ -85,14 +90,15 @@ public class ServiceStarter extends BroadcastReceiver {
                     Log.i("SimStateListener", phoneNumber);
                     Toast.makeText(context, phoneNumber, Toast.LENGTH_LONG).show();
 
-
+                    myPhoneNumber = getData("phone");
+                    Log.i("phone from database", myPhoneNumber);
                     if(phoneNumber.equals(myPhoneNumber)){
-                        // do nothing
+                        Toast.makeText(context, "Equal", Toast.LENGTH_LONG).show();
                         break;
                     }
                     else{
                         Log.i("SimStateListener", "Sim card is changed");
-                    Toast.makeText(context, "Sim card is changed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "notification", Toast.LENGTH_LONG).show();
                         notify(context);
 
 //
@@ -102,6 +108,11 @@ public class ServiceStarter extends BroadcastReceiver {
         }
 
         }
+    public String getData(String column){
+        Cursor c = database.getData();
+        c.moveToFirst();
+        return c.getString(c.getColumnIndex(column));
+    }
 
     public void notify(  Context  context){
         Intent intent2 = new Intent(context, MainActivity.class);

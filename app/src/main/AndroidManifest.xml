@@ -5,63 +5,18 @@
     <!-- Marshmallow fingerprint permission -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" /> <!-- Samsung fingerprint permission, only required if you include the Spass module -->
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-INTERNET<!--    <uses-permission-->
-<!--        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" tools:ignore="ProtectedPermissions" />-->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LightOn">
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".GPSactivity"/>
-        <activity android:name=".CorrectPasswordActivity"/>
-        <activity android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter> </activity>
-        <activity android:name=".MainActivity"/>
-          <receiver android:name=".ServiceStarter">
-
-        <intent-filter>
-            <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.action.SIM_STATE_CHANGED" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.action.PHONE_STATE" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.QUICKBOOT_POWERON" />
-        </intent-filter>
-    </receiver>
-        <receiver android:name=".USBReciver">
-
-            <intent-filter>
-<!--                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".BootReciver">
-
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
         android:theme="@style/Theme.LightOn"
         tools:replace="android:icon">
         <activity android:name=".WrongPasscode"></activity>
@@ -79,9 +34,34 @@ INTERNET<!--    <uses-permission-->
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <receiver android:name=".ServiceStarter">
+
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SIM_STATE_CHANGED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".USBReciver">
+
+            <intent-filter>
+                <!--                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BootReciver">
+
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
-
-
-
 
 </manifest>

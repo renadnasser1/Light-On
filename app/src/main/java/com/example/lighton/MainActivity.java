@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -37,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
        db = new DBHelper(this);
+        CheckBox simpleCheckBox = (CheckBox) findViewById(R.id.CheckBox);
+
+
+        Boolean checkBoxState = simpleCheckBox.isChecked();
        TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
            // TODO: Consider calling
@@ -48,13 +53,16 @@ public class MainActivity extends AppCompatActivity {
            // for ActivityCompat#requestPermissions for more details.
            return;
        }
+
        IntentFilter filter = new IntentFilter();
        filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+
        registerReceiver(receiver, filter);
 
        IntentFilter filter2 = new IntentFilter();
        filter.addAction(Intent.ACTION_BOOT_COMPLETED);
        registerReceiver(receiver, filter2);
+
 
 
     }

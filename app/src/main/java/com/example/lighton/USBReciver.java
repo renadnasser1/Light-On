@@ -3,24 +3,40 @@ package com.example.lighton;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.database.Cursor;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.hardware.usb.UsbManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
 public class USBReciver extends BroadcastReceiver {
+    private DBHelper database;
+
     @Override
     public void onReceive(Context context, Intent intent) {
+        String state = getData("usbCheck");
         Log.d("intentaction", intent.getAction());
+        database =  new DBHelper(context);
         Toast.makeText(context, intent.getAction(),
                 Toast.LENGTH_LONG).show();
 
+     Toast.makeText(context, ""+state, Toast.LENGTH_SHORT).show();
+
+
+
         notify(context);
 
+    }
+    public String getData(String column){
+        Cursor c = database.getData();
+        c.moveToFirst();
+        return c.getString(c.getColumnIndex(column));
     }
     public void notify(  Context  context){
         Intent intent2 = new Intent(context, MainActivity.class);
