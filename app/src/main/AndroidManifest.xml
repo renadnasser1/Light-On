@@ -5,16 +5,12 @@
     <!-- Marshmallow fingerprint permission -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" /> <!-- Samsung fingerprint permission, only required if you include the Spass module -->
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-INTERNET<!--    <uses-permission-->
-<!--        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" tools:ignore="ProtectedPermissions" />-->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -38,27 +34,27 @@ INTERNET<!--    <uses-permission-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".MainActivity" />
         <!-- Start the Service if applicable on boot -->
         <receiver android:name=".ServiceStarter">
 
-        <intent-filter>
-            <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.action.SIM_STATE_CHANGED" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.action.PHONE_STATE" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.QUICKBOOT_POWERON" />
-        </intent-filter>
-    </receiver>
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SIM_STATE_CHANGED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".USBReciver">
 
             <intent-filter>
-<!--                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
+                <!--                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
             </intent-filter>
         </receiver>
@@ -68,11 +64,6 @@ INTERNET<!--    <uses-permission-->
                 <action android:name="android.intent.action.ACTION_BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-
-
     </application>
-
-
-
 
 </manifest>

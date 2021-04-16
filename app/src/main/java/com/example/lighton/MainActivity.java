@@ -1,45 +1,40 @@
 package com.example.lighton;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
-import android.os.Build;
-import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.content.Context;
-import android.widget.Toast;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
+
+
+import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.content.Context;
+
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-    private BroadcastReceiver receiver;
-    private Object Context;
     DBHelper db;
+    private BroadcastReceiver receiver;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DBHelper(this);
         IntentFilter intentFilter = new IntentFilter();
         ServiceStarter simChangedReceiver = new ServiceStarter();
         registerReceiver(simChangedReceiver, intentFilter);
@@ -62,21 +57,6 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction(Intent.ACTION_BOOT_COMPLETED);
         registerReceiver(receiver, filter2);
 
-
-
-//
-
-
-
-
-
-    };
-
-
-
-
-
-        db = new DBHelper(this);
 
     }
 
