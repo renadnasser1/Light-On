@@ -25,7 +25,7 @@ public class ServiceStarter extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
             database =  new DBHelper(context);
             String number = getData();
-            Toast.makeText(context,number,Toast.LENGTH_SHORT);
+//            Toast.makeText(context,number,Toast.LENGTH_SHORT);
             // Checks Sim card State
             TelephonyManager telephoneMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             int simState = telephoneMgr.getSimState();

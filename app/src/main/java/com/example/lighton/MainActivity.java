@@ -95,17 +95,17 @@ public class MainActivity extends AppCompatActivity {
 
         if (checkBoxState) {
             if (database.update(1)) {
-                makeText(this, "update", LENGTH_SHORT).show();
+//                makeText(this, "update", LENGTH_SHORT).show();
 
             } else {
-                makeText(this, "erorro", LENGTH_SHORT).show();
+//                makeText(this, "erorro", LENGTH_SHORT).show();
             }
         } else {
             if (database.update(0)) {
-                makeText(this, "update", LENGTH_SHORT).show();
+//                makeText(this, "update", LENGTH_SHORT).show();
 
             } else {
-                makeText(this, "erorro", LENGTH_SHORT).show();
+//                makeText(this, "erorro", LENGTH_SHORT).show();
             }
         }
     }

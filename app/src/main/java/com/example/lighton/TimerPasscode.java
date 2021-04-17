@@ -132,6 +132,7 @@ EditText etTo, etSubject, etMessage;
         Reprint.authenticate(new AuthenticationListener() {
             public void onSuccess(int moduleTag) {
                 showSuccess();
+                stopTimer();
             }
 
             public void onFailure(AuthenticationFailureReason failureReason, boolean fatal,

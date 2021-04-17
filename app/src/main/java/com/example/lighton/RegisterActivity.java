@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
         input += "Name: " + textInputName.getEditText().getText().toString();
         input += "\n";
         input += "Password: " + passcode;
-        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
     }
 
     public void insertData() {
@@ -144,18 +144,18 @@ public class RegisterActivity extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            Toast.makeText(this,"inside if",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,"inside if",Toast.LENGTH_SHORT).show();
 
             return;
 
         }
         String phoneNumber = telephoneMgr.getLine1Number();
         Log.d("phoneR",phoneNumber);
-        Toast.makeText(this,phoneNumber,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,phoneNumber,Toast.LENGTH_SHORT).show();
 
         boolean checkInset = database.insertUserData(name,email,passCode,phoneNumber);
         if(checkInset){
-            Toast.makeText(this,"Data saved successfully",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,"Data saved successfully",Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

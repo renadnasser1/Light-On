@@ -18,7 +18,7 @@ public class USBReciver extends BroadcastReceiver {
         database =  new DBHelper(context);
         int state = getUSBcheck("usbCheck");
         String phone = getData() ;
-        Toast.makeText(context, phone, Toast.LENGTH_LONG).show();
+//        Toast.makeText(context, phone, Toast.LENGTH_LONG).show();
         if (state == 1){
             goToTimerPasscode(context);
 
