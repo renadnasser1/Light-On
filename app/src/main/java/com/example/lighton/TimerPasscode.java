@@ -17,6 +17,44 @@ import com.github.ajalt.reprint.core.AuthenticationListener;
 import com.github.ajalt.reprint.core.Reprint;
 import com.google.android.material.textfield.TextInputLayout;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 
 public class TimerPasscode extends AppCompatActivity {
@@ -30,7 +68,22 @@ public class TimerPasscode extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliSeconds = 60000; // 60 sec == 1 min
     private boolean isTimerRunning = true;
-
+// email and location varibles
+//Initialize varible
+EditText etTo, etSubject, etMessage;
+    Button btSend;
+    String sEmail, sPassword;
+    String locationCountry;
+    String locationCity;
+    String locationAddress;
+    double locationLatitude;
+    double locationLongitude;
+    Properties properties = new Properties();
+    //location varibles
+    Button btLocation;
+    TextView textView1, textView2, textView3, textView4, textView5;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    //end of email and location varibles
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

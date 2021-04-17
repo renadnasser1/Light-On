@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LightOn"
-        tools:replace="android:icon">
+        tools:replace="android:icon"
+        android:debuggable="true"
+        tools:ignore="HardcodedDebugMode">
         <activity android:name=".WrongPasscode"></activity>
         <activity android:name=".TimerPasscode" />
         <activity android:name=".RegisterActivity" />
