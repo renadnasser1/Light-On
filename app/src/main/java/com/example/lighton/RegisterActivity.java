@@ -134,7 +134,9 @@ public class RegisterActivity extends AppCompatActivity {
         String email = textInputEmail.getEditText().getText().toString();
         String passCode = passcode;
         TelephonyManager telephoneMgr = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -142,9 +144,13 @@ public class RegisterActivity extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(this,"inside if",Toast.LENGTH_SHORT).show();
+
             return;
+
         }
         String phoneNumber = telephoneMgr.getLine1Number();
+        Log.d("phoneR",phoneNumber);
         Toast.makeText(this,phoneNumber,Toast.LENGTH_SHORT).show();
 
         boolean checkInset = database.insertUserData(name,email,passCode,phoneNumber);

@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 //           return;
 //       }
 
-
         ReciverReigster();
 
 
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void deleteData(View view) {
+    public void deleteData(View v) {
         db.delete();
         finish();
     }

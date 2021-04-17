@@ -159,46 +159,6 @@ EditText etTo, etSubject, etMessage;
 
             @Override
             public void onFinish() {
-
-            }
-        }.start(); //starting the timer
-
-        isTimerRunning = true;
-    }
-
-    // use it when user enters the passcode
-    public void stopTimer(){
-        countDownTimer.cancel();
-        isTimerRunning = false;
-    }
-
-    public void updateTimer(){
-        int seconds = (int) timeLeftInMilliSeconds % 60000 / 1000;
-
-        String timeLeftText;
-
-        timeLeftText = "00"; // min
-        timeLeftText += ":";
-        if(seconds < 10) timeLeftText += "0"; // 09, 08, ...etc
-        timeLeftText += seconds;
-
-        countdownText.setText(timeLeftText);
-
-        // to change countdownText color when reaching some points
-        if ( 60> seconds ){
-            countdownText.setTextColor(Color.parseColor("#A0BC9E"));
-            if ( 30> seconds ){
-                countdownText.setTextColor(Color.parseColor("#e8c843"));
-            }
-            if ( 10> seconds ){
-                countdownText.setTextColor(Color.parseColor("#DF7861"));
-            }
-            if ( 0 == seconds){
-                verifyButton.setEnabled(false);
-                Intent intent = new Intent(TimerPasscode.this, WrongPasscode.class);
-                startActivity(intent);
-                finish();
-
                 //TODO: SEND AN EMAIL WITH CURRENT LOCATION
                 Log.d("Areej tag", "statrt on click :" + toString());
 
@@ -260,9 +220,48 @@ EditText etTo, etSubject, etMessage;
 
             }
 
-            }
-        }
 
+        }.start(); //starting the timer
+
+        isTimerRunning = true;
+    }
+
+    // use it when user enters the passcode
+    public void stopTimer(){
+        countDownTimer.cancel();
+        isTimerRunning = false;
+    }
+
+    public void updateTimer() {
+        int seconds = (int) timeLeftInMilliSeconds % 60000 / 1000;
+
+        String timeLeftText;
+
+        timeLeftText = "00"; // min
+        timeLeftText += ":";
+        if (seconds < 10) timeLeftText += "0"; // 09, 08, ...etc
+        timeLeftText += seconds;
+
+        countdownText.setText(timeLeftText);
+
+        // to change countdownText color when reaching some points
+        if (60 > seconds) {
+            countdownText.setTextColor(Color.parseColor("#A0BC9E"));
+
+
+            if (30 > seconds) {
+                countdownText.setTextColor(Color.parseColor("#e8c843"));
+            }
+            if (10 > seconds) {
+                countdownText.setTextColor(Color.parseColor("#DF7861"));
+            }
+            if (0 == seconds) {
+                verifyButton.setEnabled(false);
+
+            }
+
+        }
+    }
 
     private boolean validatePassword() {
         String one = digitOne.getEditText().getText().toString().trim();
@@ -396,32 +395,32 @@ EditText etTo, etSubject, etMessage;
                         Log.d("Areej tag", "سويت اللست :" + toString());
 
                         //set latitude on TextView
-                        textView1.setText(Html.fromHtml("<font color='#6200EE'><b>Latitude :</b><br></font>"
-                                + addresses.get(0).getLatitude()));
+//                        textView1.setText(Html.fromHtml("<font color='#6200EE'><b>Latitude :</b><br></font>"
+//                                + addresses.get(0).getLatitude()));
 
                         locationLatitude=addresses.get(0).getLatitude();
-                        textView2.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Longitude :</b><br></font>"
-                                        + addresses.get(0).getLongitude()
-                        ));
+//                        textView2.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Longitude :</b><br></font>"
+//                                        + addresses.get(0).getLongitude()
+//                        ));
                         locationLongitude=addresses.get(0).getLongitude();
                         //Set country name
-                        textView3.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Country Name :</b><br></font>"
-                                        + addresses.get(0).getCountryName()
-                        ));
+//                        textView3.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Country Name :</b><br></font>"
+//                                        + addresses.get(0).getCountryName()
+//                        ));
                         locationCountry=addresses.get(0).getCountryName();
                         //Set locality
-                        textView4.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Locality :</b><br></font>"
-                                        + addresses.get(0).getLocality()
-                        ));
+//                        textView4.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Locality :</b><br></font>"
+//                                        + addresses.get(0).getLocality()
+//                        ));
                         locationCity=addresses.get(0).getLocality();
                         //set address
-                        textView5.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Address :</b><br></font>"
-                                        + addresses.get(0).getAddressLine(0)
-                        ));
+//                        textView5.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Address :</b><br></font>"
+//                                        + addresses.get(0).getAddressLine(0)
+//                        ));
                         locationAddress=addresses.get(0).getAddressLine(0);
                         Log.d("Areej tag", "Yaaaaaaaay :" + toString());
                         sendEmail();
@@ -466,7 +465,8 @@ EditText etTo, etSubject, etMessage;
             //Sender email
             message.setFrom(new InternetAddress(sEmail));
             //recipient email
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("etwaa69@gmail.com"));
+            String email = getData("email");
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 
             //Email subject
             message.setSubject("Warning! Is your mobile lost?");
@@ -492,39 +492,19 @@ EditText etTo, etSubject, etMessage;
     private class SendMail extends AsyncTask<javax.mail.Message,String,String> {
 
         //initalize progress par
-        ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog= ProgressDialog.show(TimerPasscode.this, "Please Wait", "Sending Mail...", true);
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //dismiss progress dialog
-            progressDialog.dismiss();
             if (s.equals("success")){
-                //when success
-
-                //initialize alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(TimerPasscode.this);
-                builder.setCancelable(false);
-                builder.setTitle(Html.fromHtml("<font color='#509324'>Success</font>"));
-                builder.setMessage("Mail send successfully.");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        //clear all edit text
-                        etTo.setText("");
-                        etSubject.setText("");
-                        etMessage.setText("");
-                    }
-                });
-                //show alert dialog
-                builder.show();
-
+                Intent intent = new Intent(TimerPasscode.this, WrongPasscode.class);
+                startActivity(intent);
+                finish();
             }else {
                 //when error
                 Toast.makeText(getApplicationContext(), "Something went worng ?", Toast.LENGTH_SHORT).show();
