@@ -80,7 +80,10 @@ public class MainActivity extends AppCompatActivity {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         // smtp.googlemail.com
         properties.put("mail.smtp.port", "587");
-
+        //Sender email credential
+        sEmail = "LightOnApplication@gmail.com";
+        // char[] sPassword = {'p','a','s','s'};
+        sPassword = "AAaa@@22";
         //initalize fusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         btLocation.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Sender email credential
-        sEmail = "LightOnApplication@gmail.com";
-        // char[] sPassword = {'p','a','s','s'};
-        sPassword = "AAaa@@22";
+
 
 
         btSend.setOnClickListener(new View.OnClickListener() {
